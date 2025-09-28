@@ -1,0 +1,106 @@
+# ====================================================================
+# Arquivo de configuração de exemplo para o projeto Terraform S3 Seguro
+# 
+# INSTRUÇÕES:
+# 1. Copie este arquivo para "terraform.tfvars"
+# 2. Altere os valores abaixo conforme necessário
+# 3. Nunca commite o arquivo terraform.tfvars no Git (dados sensíveis)
+# ====================================================================
+
+# ====================================================================
+# CONFIGURAÇÕES OBRIGATÓRIAS
+# ====================================================================
+
+# Nome do bucket S3 (deve ser globalmente único)
+# IMPORTANTE: Mude este valor! Use seu nome/projeto para garantir unicidade
+# Formato: apenas letras minúsculas, números e hífens (3-63 caracteres)
+
+bucket_name = "seu-bucket-seguro-001"
+
+# ====================================================================
+# CONFIGURAÇÕES DE AMBIENTE
+# ====================================================================
+
+# Ambiente de deployment
+# Valores aceitos: "dev", "staging", "prod"
+
+environment = "dev"
+
+# Nome do projeto (usado nas tags)
+
+project_name = "terraform-s3-seguro"
+
+# Região AWS onde os recursos serão criados
+# Considere latência e conformidade regulatória na escolha
+
+aws_region = "us-east-1"
+
+# ====================================================================
+# CONFIGURAÇÕES DE SEGURANÇA
+# ====================================================================
+
+# Habilitar versionamento do bucket
+# true = mantém histórico de versões (recomendado para produção)
+# false = sem versionamento (adequado para testes)
+
+enable_versioning = true
+
+# Restringir acesso apenas à conta AWS atual
+# true = máxima segurança, apenas sua conta AWS
+# false = permite configurações de acesso mais flexíveis
+
+restrict_to_account_only = true
+
+# ====================================================================
+# CONFIGURAÇÕES DE CUSTO E PERFORMANCE
+# ====================================================================
+
+# Habilitar política de ciclo de vida para otimização de custos
+# true = aplica transições automáticas (STANDARD -> IA -> GLACIER)
+# false = todos os dados permanecem em STANDARD (mais caro)
+
+enable_lifecycle_policy = true
+
+# Habilitar logging de acesso (cria bucket adicional para logs)
+# true = cria bucket extra para auditoria (custos adicionais)
+# false = sem logging de acesso (economia de custos)
+
+enable_access_logging = false
+
+# ====================================================================
+# EXEMPLOS DE CONFIGURAÇÃO POR AMBIENTE
+# ====================================================================
+
+# DESENVOLVIMENTO:
+# bucket_name = "meuapp-dev-bucket-001"
+# environment = "dev"
+# enable_versioning = false
+# enable_lifecycle_policy = false
+# enable_access_logging = false
+
+# PRODUÇÃO:
+# bucket_name = "meuapp-prod-bucket-001"
+# environment = "prod"  
+# enable_versioning = true
+# enable_lifecycle_policy = true
+# enable_access_logging = true
+
+# ====================================================================
+# DICAS DE NOMENCLATURA DO BUCKET
+# ====================================================================
+
+# Padrões recomendados:
+# - Incluir nome da empresa/projeto
+# - Incluir ambiente (dev/prod)
+# - Incluir número sequencial para unicidade
+# 
+# Exemplos válidos:
+# - "minhaempresa-backup-prod-001"
+# - "projeto-dados-dev-2024"
+# - "app-uploads-staging-v1"
+#
+# Evite:
+# - Letras maiúsculas
+# - Underscores (_)
+# - Pontos no início/fim
+# - Palavras como "aws", "s3" no nome
