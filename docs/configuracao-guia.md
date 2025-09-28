@@ -19,17 +19,20 @@ bucket_name = "seu-bucket-seguro-001"
 **Por que é importante**: Nomes de bucket S3 são globalmente únicos em toda a AWS. Duas pessoas no mundo inteiro não podem ter o mesmo nome.
 
 **Como escolher**:
+
 - Use seu nome/empresa + projeto + número: `joaosilva-backup-001`
 - Inclua o ambiente: `minhaapp-dev-bucket-001`
 - Mantenha entre 3-63 caracteres
 - Apenas letras minúsculas, números e hífens
 
 **Exemplos válidos**:
+
 - `minhaempresa-dados-prod-001`
 - `projeto-uploads-dev-2024`
 - `backup-pessoal-v1`
 
 **Evite**:
+
 - `MeuBucket` (maiúsculas não permitidas)
 - `meu_bucket` (underscores não recomendados)
 - `aws-meu-bucket` (evite prefixos AWS)
@@ -46,11 +49,11 @@ aws_region = "us-east-1"
 
 **Considerações para escolha**:
 
-| Região | Vantagem | Desvantagem |
-|--------|----------|-------------|
-| `us-east-1` | Mais barata, mais serviços | Maior latência do Brasil |
-| `sa-east-1` | Menor latência do Brasil | Mais cara, menos serviços |
-| `us-west-2` | Boa performance, completa | Latência média |
+| Região      | Vantagem                   | Desvantagem               |
+| ----------- | -------------------------- | ------------------------- |
+| `us-east-1` | Mais barata, mais serviços | Maior latência do Brasil  |
+| `sa-east-1` | Menor latência do Brasil   | Mais cara, menos serviços |
+| `us-west-2` | Boa performance, completa  | Latência média            |
 
 ### Ambiente de Deployment
 
@@ -61,6 +64,7 @@ environment = "dev"
 **Opções disponíveis**: `dev`, `staging`, `prod`
 
 **Impacto prático**:
+
 - **dev**: Configurações mais permissivas, custos otimizados
 - **staging**: Espelha produção para testes finais
 - **prod**: Máxima segurança, todas as proteções ativas
@@ -84,11 +88,13 @@ enable_versioning = true
 ```
 
 **Quando usar `true`**:
+
 - Ambientes de produção
 - Dados importantes que podem ser alterados
 - Quando você precisa de histórico de mudanças
 
 **Quando usar `false`**:
+
 - Ambientes de desenvolvimento
 - Dados temporários ou logs
 - Quando o custo extra do versionamento é uma preocupação
@@ -118,6 +124,7 @@ enable_lifecycle_policy = true
 **Economia potencial**: Até 60% nos custos de armazenamento
 
 **Como funciona**:
+
 ```
 Dias 0-30:    STANDARD        ($0.023/GB)
 Dias 30-90:   STANDARD_IA     ($0.0125/GB)  ← 46% mais barato
@@ -133,11 +140,13 @@ enable_access_logging = false
 ```
 
 **Por que padrão é `false`**:
+
 - Cria um bucket adicional (custos extras)
 - Gera logs que também custam para armazenar
 - Útil apenas para auditoria detalhada
 
 **Quando habilitar**:
+
 - Ambientes de produção críticos
 - Compliance regulatório exigir
 - Investigação de padrões de acesso
@@ -227,12 +236,15 @@ restrict_to_account_only = true
 ## Problemas Comuns
 
 ### "BucketAlreadyExists"
+
 **Solução**: Mude o `bucket_name` para algo mais único
 
 ### "AccessDenied"
+
 **Solução**: Verifique se suas credenciais AWS têm permissões S3
 
 ### Custos inesperados
+
 **Solução**: Revise as configurações de versionamento e lifecycle policy
 
 ---
